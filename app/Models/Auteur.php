@@ -25,4 +25,14 @@ class Auteur extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    public static function boot()
+   {
+    parent::boot();
+    static::deleting(function($auteur){
+        $auteur->products->each(function($values){
+           $values->delete();
+        });
+    });
+}
 }

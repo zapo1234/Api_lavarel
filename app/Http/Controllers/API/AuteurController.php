@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\AuteurResource;
 use App\Models\Auteur;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class AuteurController extends Controller
@@ -41,7 +42,7 @@ class AuteurController extends Controller
     public function show(Auteur $auteur)
     {
         // afficher un auteur et ses product
-        return(new AuteurRessource($auteur->loadMissing(['products'])))->response();
+        return(new AuteurResource($auteur->loadMissing(['products'])))->response();
     }
 
     /**
@@ -63,7 +64,8 @@ class AuteurController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Auteur $auteur)
-    {
-        //
+    { //
+        $auteur ->delete();
+         
     }
 }
